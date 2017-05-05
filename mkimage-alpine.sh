@@ -38,13 +38,6 @@ conf() {
 	printf '%s\n' $ADDITIONALREPO >> $ROOTFS/etc/apk/repositories
 }
 
-pack() {
-	local id
-	id=$(tar --numeric-owner -C $ROOTFS -c . | docker import - alpine:$REL)
-
-	docker tag $id alpine:$REL-$ARCH
-}
-
 save() {
 	[ $SAVE -eq 1 ] || return
 
@@ -82,5 +75,4 @@ tmp
 getapk
 mkbase
 conf
-pack
 save
