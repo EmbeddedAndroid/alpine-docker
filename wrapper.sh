@@ -29,7 +29,7 @@ while getopts "ha:o:r:" opt; do
     esac
 done
 
-ARCH=${ARCH:-armhf}
+export ARCH=${ARCH:-armhf}
 OS=${OS:-none}
 
 if [ -z "${OS}" ]
