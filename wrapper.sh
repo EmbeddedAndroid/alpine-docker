@@ -29,12 +29,21 @@ while getopts "ha:o:r:" opt; do
     esac
 done
 
-export ARCH=${ARCH:-armhf}
 OS=${OS:-none}
 
 if [ -z "${OS}" ]
 then
     exit 1
 fi
+
+if [ $REL != "edge" ]; then
+	REL=v$REL
+fi
+
+if [ $ARCH == "arm64" ]; then
+	ARCH=aarch64
+fi
+
+export ARCH=${ARCH:-armhf}
 
 bash "${__dir}/mkimage-${OS}.sh" -r ${REL} -s < /dev/null
